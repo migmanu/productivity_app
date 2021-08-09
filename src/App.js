@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
-function App() {
+//components
+import Tasks from './Components/Tasks'
+
+const App = () => {
+  const [tasks, setTasks] = useState([])
+  const [newTask, setNewTask] = useState("")
+
+  useEffect(() => {
+    console.log('effect init');
+    axios
+      .get('http://localhost:3001/tasks')
+      .then(response => {
+        console.log('promised fulfilled');
+        setTasks(response.data)
+      })
+  }, [])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>My first productivity App</h1>
+      <div>
+        <form>
+          <label htmlFor="input_task">Input task </label>
+          <input type="text" id="input_task"></input>
+        </form>
+        <h2>Current tasks</h2>
+        <Tasks tasks={tasks} />
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;

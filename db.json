@@ -1,0 +1,16 @@
+{
+    "tasks": [
+        {
+            "id":1,
+            "content": "Conquer the world",
+            "date": "10/09/2020",
+            "priority": true
+          },
+          {
+            "id":2,
+            "content": "Clean my room",
+            "date": "11/09/2020",
+            "priority": false
+          }
+    ]
+}
