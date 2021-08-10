@@ -18,14 +18,20 @@ const App = () => {
       })
   }, [])
 
+  const addTask = (event) => {
+    event.preventDefault()
+    console.log('addTask init');
+    
+  }
 
   return (
     <div>
       <h1>My first productivity App</h1>
       <div>
         <form>
-          <label htmlFor="input_task">Input task </label>
-          <input type="text" id="input_task"></input>
+          <label htmlFor="input_task">Input task</label>
+          <input type="text" id="input_task"></input>&nbsp;
+          <input type="submit" value="Submit task"></input>
         </form>
         <h2>Current tasks</h2>
         <Tasks tasks={tasks} />
