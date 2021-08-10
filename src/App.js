@@ -1,8 +1,10 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 //components
-import Tasks from './Components/Tasks'
+import Tasks from './Components/Tasks';
+
+//modules
+import taskService from "./Services/tasks";
 
 const App = () => {
   const [tasks, setTasks] = useState([])
@@ -10,8 +12,8 @@ const App = () => {
 
   useEffect(() => {
     console.log('effect init');
-    axios
-      .get('http://localhost:3001/tasks')
+    taskService
+      .getAll()
       .then(response => {
         console.log('promised fulfilled');
         setTasks(response.data)
@@ -27,8 +29,8 @@ const App = () => {
       priority: Math.random() < 0.5,
     }
 
-    axios
-      .post('http://localhost:3001/tasks', taskObject)
+    taskService
+      .create(taskObject)
       .then(response => {
         console.log('task saved to local server');
         setTasks(tasks.concat(response.data))
@@ -45,8 +47,8 @@ const App = () => {
       <h1>My first productivity App</h1>
       <div>
         <form onSubmit={addTask}>
-          <label htmlFor="input_task">Input task</label>&nbsp;
-          <input type="text" id="input_task" value={newTask} onChange={handleForm}></input>&nbsp;
+          <label htmlFor="input_task">Input task</label>{' '}
+          <input type="text" id="input_task" value={newTask} onChange={handleForm}></input>{' '}
           <button type="submit">Submit task</button>
         </form>
         <h2>Current tasks</h2>

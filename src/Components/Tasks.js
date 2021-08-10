@@ -1,5 +1,3 @@
-import react from 'react'
-
 /* 
 Currently simple component to display tasks
  */
