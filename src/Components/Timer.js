@@ -1,4 +1,5 @@
-import react from 'react';
+import { log } from 'loglevel';
+import react, { useEffect } from 'react';
 import styles from './timer_styles.module.css'
 
 /* 
@@ -7,7 +8,28 @@ https://dev.to/emmaadesile/build-a-timer-using-react-hooks-3he2
 */
 
 const Timer = (props) => {
-    const { minutes, seconds, isActive, setIsActive, counter, setCounter } = props
+    const { minutes, setMinutes, seconds, setSeconds, isActive, setIsActive, counter, setCounter } = props
+    console.log(isActive);
+    useEffect(() => {
+        let intervalId;
+
+        if (isActive) {
+            intervalId = setInterval(() => {
+                const secondCounter = counter % 60;
+                const minuteCounter = Math.floor(counter / 60);
+
+                const computedSecond = String(secondCounter).length === 1 ? `0${secondCounter}` : secondCounter;
+                const computedMinute = String(minuteCounter).length === 1 ? `0${minuteCounter}` : minuteCounter;
+
+                setSeconds(computedSecond)
+                setMinutes(computedMinute)
+
+                setCounter(counter => counter + 1)
+            }, 1000)
+        }
+
+        return () => clearInterval(intervalId)
+    }, [isActive, counter])
 
     return (
         <div className={styles.container}>
@@ -17,7 +39,7 @@ const Timer = (props) => {
                 <span className={styles.second}>{seconds}</span>
             </div>
             <div className={styles.buttons}>
-                <button onClick={() => setIsActive(true)} className={styles.start}>Start</button>
+                <button onClick={() => setIsActive(!isActive)} className={styles.start}>Start</button>
                 <button>Reset</button>
             </div>
         </div>

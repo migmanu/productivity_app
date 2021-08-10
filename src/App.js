@@ -64,7 +64,7 @@ const App = () => {
       <br></br>
       <div>
         <Timer minutes={minutes} setMinutes={setMinutes} seconds={seconds} setSeconds={setSeconds}
-        isActive={isActive} counter={counter} />
+        isActive={isActive} setIsActive={setIsActive} counter={counter} setCounter={setCounter} />
       </div>
     </div>
   )
