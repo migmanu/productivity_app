@@ -21,17 +21,33 @@ const App = () => {
   const addTask = (event) => {
     event.preventDefault()
     console.log('addTask init');
-    
+    const taskObject = {
+      content: newTask,
+      date: new Date(),
+      priority: Math.random() < 0.5,
+    }
+
+    axios
+      .post('http://localhost:3001/tasks', taskObject)
+      .then(response => {
+        console.log('task saved to local server');
+        setTasks(tasks.concat(response.data))
+        setNewTask('')
+      })
+  }
+
+  const handleForm = (event) => {
+    setNewTask(event.target.value)
   }
 
   return (
     <div>
       <h1>My first productivity App</h1>
       <div>
-        <form>
-          <label htmlFor="input_task">Input task</label>
-          <input type="text" id="input_task"></input>&nbsp;
-          <input type="submit" value="Submit task"></input>
+        <form onSubmit={addTask}>
+          <label htmlFor="input_task">Input task</label>&nbsp;
+          <input type="text" id="input_task" value={newTask} onChange={handleForm}></input>&nbsp;
+          <button type="submit">Submit task</button>
         </form>
         <h2>Current tasks</h2>
         <Tasks tasks={tasks} />
