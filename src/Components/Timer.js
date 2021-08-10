@@ -31,6 +31,13 @@ const Timer = (props) => {
         return () => clearInterval(intervalId)
     }, [isActive, counter])
 
+    const stopTimer = () => {
+        setIsActive(false)
+        setCounter(0)
+        setSeconds('00')
+        setMinutes('00')
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.time}>
@@ -40,7 +47,7 @@ const Timer = (props) => {
             </div>
             <div className={styles.buttons}>
                 <button onClick={() => setIsActive(!isActive)} className={styles.start}>Start</button>
-                <button>Reset</button>
+                <button onClick={stopTimer} className={styles.reset}>Reset</button>
             </div>
         </div>
     )
