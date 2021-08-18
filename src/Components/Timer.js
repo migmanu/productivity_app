@@ -1,10 +1,11 @@
-import { log } from 'loglevel';
 import react, { useEffect } from 'react';
 import styles from './timer_styles.module.css'
 
 /* 
 Simple timer component used following this tutorial: 
 https://dev.to/emmaadesile/build-a-timer-using-react-hooks-3he2
+
+To-do: look into comment suggesting optimization 
 */
 
 const Timer = (props) => {
