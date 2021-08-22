@@ -18,11 +18,11 @@ const App = () => {
   const [counter, setCounter] = useState(0)
 
   useEffect(() => {
-    console.log('effect init');
+    console.log('useEffect init');
     taskService
       .getAll()
       .then(response => {
-        console.log('promised fulfilled');
+        console.log('promised fulfilled. Tasks:', response.data);
         setTasks(response.data)
       })
   }, [])

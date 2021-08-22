@@ -1,4 +1,6 @@
 import react, { useEffect } from 'react';
+
+import StartButton from './StartButton'
 import styles from './timer_styles.module.css'
 
 /* 
@@ -47,7 +49,7 @@ const Timer = (props) => {
                 <span className={styles.second}>{seconds}</span>
             </div>
             <div className={styles.buttons}>
-                <button onClick={() => setIsActive(!isActive)} className={styles.start}>Start</button>
+                <StartButton setIsActive={setIsActive} isActive={isActive} />
                 <button onClick={stopTimer} className={styles.reset}>Reset</button>
             </div>
         </div>
