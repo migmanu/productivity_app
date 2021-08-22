@@ -11,15 +11,16 @@ To-do: look into comment suggesting optimization
 */
 
 const PomodoroTimer = (props) => {
-    const { minutes, setMinutes, seconds, setSeconds, isActive, setIsActive, counter, setCounter } = props
+    const { minutes, setMinutes, seconds, setSeconds, isActive, setIsActive, 
+        counter, setCounter, pomodoros, setPomodoros } = props
     console.log(isActive);
     useEffect(() => {
         let pomodoroCycle
-        
+        console.log('pomodoros: ', pomodoros);
 
-        if (isActive === true && counter >= 0) {
+        if (isActive === true && counter > 0) {
             pomodoroCycle = setInterval(() => {
-                const secondCounter = counter % 60;
+                const secondCounter = counter % 60 - 1;
                 const minuteCounter = Math.floor(counter / 60);
 
                 const computedSecond = String(secondCounter).length === 1 ? `0${secondCounter}` : secondCounter;
@@ -31,14 +32,21 @@ const PomodoroTimer = (props) => {
 
                 setCounter(counter - 1)
             }, 1000)
-        } 
+        }
+        
+        if (counter === 0) {
+            console.log('counter is zero');
+            setPomodoros(pomodoros + 1)
+            console.log('pomodoros now is: ', pomodoros + 1);
+            
+        }
 
         return () => clearInterval(pomodoroCycle)
     }, [isActive, counter])
 
     const stopTimer = () => {
         setIsActive(false)
-        setCounter(1500)
+        setCounter(5)
         setMinutes('25')
         setSeconds('00')
     }
@@ -52,7 +60,7 @@ const PomodoroTimer = (props) => {
             </div>
             <div className={styles.buttons}>
                 <StartButton setIsActive={setIsActive} isActive={isActive} />
-                <button onClick={stopTimer} className={styles.reset}>Reset</button>
+                <button onClick={stopTimer} className={styles.reset}>Restart</button>
             </div>
         </div>
     )

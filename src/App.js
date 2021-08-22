@@ -15,7 +15,8 @@ const App = () => {
   const [minutes, setMinutes] = useState('25')
   const [seconds, setSeconds] = useState('00')
   const [isActive, setIsActive] = useState(false)
-  const [counter, setCounter] = useState(1500)
+  const [counter, setCounter] = useState(5)
+  const [pomodoros, setPomodoros] = useState(0)
 
   useEffect(() => {
     taskService
@@ -62,7 +63,8 @@ const App = () => {
       <br></br>
       <div>
         <PomodoroTimer minutes={minutes} setMinutes={setMinutes} seconds={seconds} setSeconds={setSeconds}
-        isActive={isActive} setIsActive={setIsActive} counter={counter} setCounter={setCounter} />
+        isActive={isActive} setIsActive={setIsActive} counter={counter} setCounter={setCounter}
+        pomodoros={pomodoros} setPomodoros={setPomodoros} />
       </div>
     </div>
   )
