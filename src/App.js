@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 //components
 import Tasks from './Components/Tasks';
-import Timer from "./Components/Timer";
+import PomodoroTimer from "./Components/PomodoroTimer";
 
 //modules
 import taskService from "./Services/tasks";
@@ -12,17 +12,15 @@ const App = () => {
   const [newTask, setNewTask] = useState("")
 
   //timer states
-  const [minutes, setMinutes] = useState('00')
+  const [minutes, setMinutes] = useState('25')
   const [seconds, setSeconds] = useState('00')
   const [isActive, setIsActive] = useState(false)
-  const [counter, setCounter] = useState(0)
+  const [counter, setCounter] = useState(1500)
 
   useEffect(() => {
-    console.log('useEffect init');
     taskService
       .getAll()
       .then(response => {
-        console.log('promised fulfilled. Tasks:', response.data);
         setTasks(response.data)
       })
   }, [])
@@ -63,7 +61,7 @@ const App = () => {
       </div>
       <br></br>
       <div>
-        <Timer minutes={minutes} setMinutes={setMinutes} seconds={seconds} setSeconds={setSeconds}
+        <PomodoroTimer minutes={minutes} setMinutes={setMinutes} seconds={seconds} setSeconds={setSeconds}
         isActive={isActive} setIsActive={setIsActive} counter={counter} setCounter={setCounter} />
       </div>
     </div>

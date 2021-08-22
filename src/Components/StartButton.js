@@ -2,15 +2,12 @@ import styles from './timer_styles.module.css'
 
 const StartButton = (props) => {
     const { setIsActive, isActive } = props
-    console.log('Button module init. isActive:', isActive);
 
     if (isActive === true) {
-        console.log('isActive is true');
         return (
             <button onClick={() => setIsActive(false)} className={styles.pause}>Pause</button>
         )
-    } else {
-        console.log('isActive is false');
+    } else if (isActive === false) {
         return (
             <button onClick={() => setIsActive(true)} className={styles.start}>Start</button>
         )

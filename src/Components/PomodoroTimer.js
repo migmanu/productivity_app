@@ -10,14 +10,15 @@ https://dev.to/emmaadesile/build-a-timer-using-react-hooks-3he2
 To-do: look into comment suggesting optimization 
 */
 
-const Timer = (props) => {
+const PomodoroTimer = (props) => {
     const { minutes, setMinutes, seconds, setSeconds, isActive, setIsActive, counter, setCounter } = props
     console.log(isActive);
     useEffect(() => {
-        let intervalId;
+        let pomodoroCycle
+        
 
-        if (isActive) {
-            intervalId = setInterval(() => {
+        if (isActive === true && counter >= 0) {
+            pomodoroCycle = setInterval(() => {
                 const secondCounter = counter % 60;
                 const minuteCounter = Math.floor(counter / 60);
 
@@ -26,19 +27,20 @@ const Timer = (props) => {
 
                 setSeconds(computedSecond)
                 setMinutes(computedMinute)
+                console.log('counter is: ', counter); 
 
-                setCounter(counter => counter + 1)
+                setCounter(counter - 1)
             }, 1000)
-        }
+        } 
 
-        return () => clearInterval(intervalId)
+        return () => clearInterval(pomodoroCycle)
     }, [isActive, counter])
 
     const stopTimer = () => {
         setIsActive(false)
-        setCounter(0)
+        setCounter(1500)
+        setMinutes('25')
         setSeconds('00')
-        setMinutes('00')
     }
 
     return (
@@ -56,4 +58,4 @@ const Timer = (props) => {
     )
 }
 
-export default Timer
+export default PomodoroTimer
