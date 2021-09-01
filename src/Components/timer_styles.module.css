@@ -15,6 +15,11 @@
     margin-bottom: 1rem;
     color: white;
   }
+
+  .pomodoros {
+    font-size: 2rem;
+    color: white;
+  }
   
   .buttons button {
     padding: 0.8rem 2rem;
