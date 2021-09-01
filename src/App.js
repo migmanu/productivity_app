@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 
 //components
 import Tasks from './Components/Tasks';
-import PomodoroTimer from "./Components/PomodoroTimer";
+import Timer from './Components/Timer';
+import Pomodoro from './Components/Pomodoro'
 
 //modules
 import taskService from "./Services/tasks";
+
+//styles
+import styles from './timer_styles.module.css'
 
 const App = () => {
   const [tasks, setTasks] = useState([])
@@ -61,10 +65,12 @@ const App = () => {
         <Tasks tasks={tasks} />
       </div>
       <br></br>
-      <div>
-        <PomodoroTimer minutes={minutes} setMinutes={setMinutes} seconds={seconds} setSeconds={setSeconds}
-        isActive={isActive} setIsActive={setIsActive} counter={counter} setCounter={setCounter}
+      <div className={styles.container}>
+        <Timer minutes={minutes} setMinutes={setMinutes} seconds={seconds} setSeconds={setSeconds}
+        isActive={isActive} counter={counter} setCounter={setCounter}
         pomodoros={pomodoros} setPomodoros={setPomodoros} />
+        <Pomodoro setCounter={setCounter} setMinutes={setMinutes} setSeconds={setSeconds} 
+        isActive={isActive} setIsActive={setIsActive} pomodoros={pomodoros} setPomodoros={setPomodoros} />
       </div>
     </div>
   )

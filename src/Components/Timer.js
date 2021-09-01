@@ -1,6 +1,5 @@
 import react, { useEffect } from 'react';
 
-import StartButton from './StartButton'
 import styles from './timer_styles.module.css'
 
 /* 
@@ -10,8 +9,8 @@ https://dev.to/emmaadesile/build-a-timer-using-react-hooks-3he2
 To-do: look into comment suggesting optimization 
 */
 
-const PomodoroTimer = (props) => {
-    const { minutes, setMinutes, seconds, setSeconds, isActive, setIsActive, 
+const Timer = (props) => {
+    const { minutes, setMinutes, seconds, setSeconds, isActive, 
         counter, setCounter, pomodoros, setPomodoros } = props
     console.log(isActive);
     useEffect(() => {
@@ -44,26 +43,15 @@ const PomodoroTimer = (props) => {
         return () => clearInterval(pomodoroCycle)
     }, [isActive, counter])
 
-    const stopTimer = () => {
-        setIsActive(false)
-        setCounter(5)
-        setMinutes('25')
-        setSeconds('00')
-    }
-
     return (
-        <div className={styles.container}>
-            <div className={styles.time}>
-                <span className={styles.minute}>{minutes}</span>
-                <span>:</span>
-                <span className={styles.second}>{seconds}</span>
-            </div>
-            <div className={styles.buttons}>
-                <StartButton setIsActive={setIsActive} isActive={isActive} />
-                <button onClick={stopTimer} className={styles.reset}>Restart</button>
-            </div>
+        
+        <div className={styles.time}>
+            <span className={styles.minute}>{minutes}</span>
+            <span>:</span>
+            <span className={styles.second}>{seconds}</span>
         </div>
+        
     )
 }
 
-export default PomodoroTimer
+export default Timer
