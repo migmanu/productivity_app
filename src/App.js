@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 //components
-import Tasks from './Components/Tasks';
-import Timer from './Components/Timer';
-import Pomodoro from './Components/Pomodoro'
+import Tasks from './Components/Kanban_components/Tasks';
+import Timer from './Components/Pomodoro_components/Timer';
+import Pomodoro from './Components/Pomodoro_components/Pomodoro'
 
 //modules
 import taskService from "./Services/tasks";
