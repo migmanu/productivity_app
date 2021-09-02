@@ -1,5 +1,4 @@
-import react, { useEffect } from 'react';
-import StartButton from './StartButton'
+import { useEffect } from 'react';
 import styles from './timer_styles.module.css'
 
 /* 
@@ -16,11 +15,9 @@ Displays time counter and buttons.
 
 const Timer = (props) => {
     const { minutes, setMinutes, seconds, setSeconds, isActive, setIsActive, 
-        counter, setCounter, pomodoros, setPomodoros } = props
-    console.log(isActive);
+        counter, setCounter } = props
     useEffect(() => {
         let pomodoroCycle
-        console.log('pomodoros: ', pomodoros);
 
         if (isActive === true && counter > 0) {
             pomodoroCycle = setInterval(() => {
@@ -31,29 +28,20 @@ const Timer = (props) => {
                 const computedMinute = String(minuteCounter).length === 1 ? `0${minuteCounter}` : minuteCounter;
 
                 setSeconds(computedSecond)
-                setMinutes(computedMinute)
-                console.log('counter is: ', counter); 
+                setMinutes(computedMinute) 
 
                 setCounter(counter - 1)
             }, 1000)
-        }
-        
-        if (counter === 0) {
-            console.log('counter is zero');
-            setPomodoros(pomodoros + 1)
-            console.log('pomodoros now is: ', pomodoros + 1);
+        } else if (counter === 0) {
+            console.log(`counter is zero, isActive set to false`);
+            setIsActive(false)
             
         }
+        
+        
 
         return () => clearInterval(pomodoroCycle)
     }, [isActive, counter])
-
-    const stopTimer = () => {
-        setIsActive(false)
-        setCounter(5)
-        setMinutes('25')
-        setSeconds('00')
-    }
 
     return (
         
@@ -61,11 +49,6 @@ const Timer = (props) => {
             <span className={styles.minute}>{minutes}</span>
             <span>:</span>
             <span className={styles.second}>{seconds}</span>
-            <div className={styles.pomodoros}>Cycles:{pomodoros}</div>
-            <div className={styles.buttons}>
-            <StartButton setIsActive={setIsActive} isActive={isActive} />
-            <button onClick={stopTimer} className={styles.reset}>Restart</button>
-        </div>
         </div>
         
     )
