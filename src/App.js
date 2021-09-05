@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Tasks from './Components/Kanban_components/Tasks';
 import Timer from './Components/Pomodoro_components/Timer';
 import Pomodoro from './Components/Pomodoro_components/Pomodoro'
+import KanbanContext from './Components/Kanban_components/KanbanContext'
 
 //modules
 import taskService from "./Services/tasks";
@@ -62,6 +63,7 @@ const App = () => {
           <input type="text" id="input_task" value={newTask} onChange={handleForm}></input>{' '}
           <button type="submit">Submit task</button>
         </form>
+        <KanbanContext />
         <h2>Current tasks</h2>
         <Tasks tasks={tasks} />
       </div>
