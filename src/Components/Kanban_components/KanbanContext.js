@@ -7,15 +7,15 @@ const KanbanContext = () => {
 
     const exampleArray = [
         {
-            id: 1,
+            id: "1",
             task: 'do something today',
         },
         {
-            id: 2,
+            id: "2",
             task: 'anything will do really',
         },
         {
-            id: 3,
+            id: "3",
             task: 'please...',
         }
     ]
@@ -31,7 +31,7 @@ const KanbanContext = () => {
                     <ul className="id" ref={provided.innerRef} {...provided.droppableProps}>
                     {exampleArray.map(({id, task}, index) => {
                         return (
-                            <Draggable key={id} draggableId="Draggable" index={index}>
+                            <Draggable key={id} draggableId={id} index={index}>
                                 {(provided) => (
                                     <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                                         <p>
