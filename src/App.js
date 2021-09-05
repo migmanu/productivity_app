@@ -15,13 +15,13 @@ const App = () => {
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState("")
 
-  //timer states
+  //Pomodoro timer states
   const [minutes, setMinutes] = useState('25')
   const [seconds, setSeconds] = useState('00')
   const [isActive, setIsActive] = useState(false)
-  const [counter, setCounter] = useState(2) //state used to count passed time in pomodoro cycle
-  const [pomodoros, setPomodoros] = useState(0) //state used to count number of pomodoro cycles
-  const [corte, setCorte] = useState(true)
+  const [counter, setCounter] = useState(2) //used to count passed time in pomodoro cycle
+  const [pomodoros, setPomodoros] = useState(0) //used to count number of pomodoro cycles
+  const [corte, setCorte] = useState(true) //use to control when on pomodoro and when on break
 
   useEffect(() => {
     taskService
