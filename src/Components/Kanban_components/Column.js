@@ -6,7 +6,8 @@ const grid = 8;
 const getColumnStyle = isDraggingOver => ({
     background: isDraggingOver ? "lightblue" : "lightgrey",
     padding: grid,
-    width: 250
+    width: 250,
+    listStyle: 'none'
   });
 
 const Column = (props) => {

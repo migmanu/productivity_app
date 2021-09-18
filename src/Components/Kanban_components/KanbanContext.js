@@ -91,10 +91,12 @@ const KanbanContext = () => {
     }
 
     return (
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Column droppableId="0" characters={characters[0]} />
-            <Column droppableId="1" characters={characters[1]} />
-        </DragDropContext>
+        <div style={{ display: "flex" }}>
+            <DragDropContext onDragEnd={handleOnDragEnd}>
+                <Column droppableId="0" characters={characters[0]} />
+                <Column droppableId="1" characters={characters[1]} />
+            </DragDropContext>
+        </div>
     )
 }
 
