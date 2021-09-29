@@ -1,5 +1,5 @@
 /* 
-Currently simple component to display tasks
+Currently simple component to display tasks in a list. Not needed for kanban
  */
 const Tasks = (props) => {
     return (

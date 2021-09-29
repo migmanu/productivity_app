@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
+
+//import components
 import Column from './Column';
+
+//import services
+import taskService from '../../Services/tasks';
+
 
 //function to move cards between columns
 const move = (source, destination, droppableSource, droppableDestination) => {
@@ -30,38 +36,24 @@ const reorder = (list, startIndex, endIndex) => {
 
 
 const KanbanContext = () => {
-    const exampleArray = [
-            [
-                {
-                    id: "1",
-                    task: 'do something today',
-                },
-                {
-                    id: "2",
-                    task: 'anything will do really',
-                },
-                {
-                    id: "3",
-                    task: 'please...',
-                },
-            ],
-            [
-                {
-                    id: "4",
-                    task: 'llevar anteojos',
-                },
-                {
-                    id: "5",
-                    task: 'llevar encendedor',
-                },
-                {
-                    id: "6",
-                    task: 'rax haceeee el check iiiiiiiiin',
-                },
-            ]
-    ]
 
-    const [characters, updateCharacters] = useState(exampleArray);
+    const [tasks, setTasks] = useState([[], []])
+
+    useEffect(() => {
+        taskService
+          .getAll()
+          .then(response => {
+            setTasks(
+                [
+                    response.data.filter(task => task.column === 0),
+                    response.data.filter(task => task.column === 1)
+                ]
+            )
+          })
+      }, [])
+
+
+    const [characters, updateCharacters] = useState(tasks);
 
     //function to save list order after movement. Adding movement between lists
     const handleOnDragEnd = (result) => {
@@ -93,8 +85,8 @@ const KanbanContext = () => {
     return (
         <div style={{ display: "flex" }}>
             <DragDropContext onDragEnd={handleOnDragEnd}>
-                <Column droppableId="0" characters={characters[0]} />
-                <Column droppableId="1" characters={characters[1]} />
+                <Column droppableId="0" tasks={tasks[0]} />
+                <Column droppableId="1" tasks={tasks[1]} />
             </DragDropContext>
         </div>
     )
