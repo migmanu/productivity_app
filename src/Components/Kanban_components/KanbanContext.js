@@ -68,10 +68,10 @@ const KanbanContext = () => {
         console.log('sInd is:', sInd, 'dInd is: ', dInd);
 
         if (sInd === dInd) { //card moved inside same column
-            const items = reorder(characters[sInd], source.index, destination.index);
-            const newCharacters = [...characters];
-            newCharacters[sInd] = items;
-            updateCharacters(newCharacters);
+            const items = reorder(tasks[sInd], source.index, destination.index);
+            const newTasks = [...tasks];
+            newTasks[sInd] = items;
+            setTasks(newTasks);
           } else { //card moved to another column
             const result = move(characters[sInd], characters[dInd], source, destination);
             const newCharacters = [...characters];
