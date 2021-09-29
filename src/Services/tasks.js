@@ -9,9 +9,16 @@ const create = newObject => {
     return axios.post(baseUrl, newObject)
 }
 
+const edit = task => {
+    const id = task.id
+    const objectUrl = baseUrl + '/' + id
+    return axios.put(objectUrl, task)
+}
+
 const taskService = {
     getAll,
-    create
+    create,
+    edit
 }
 
 

@@ -73,12 +73,25 @@ const KanbanContext = () => {
             newTasks[sInd] = items;
             setTasks(newTasks);
           } else { //card moved to another column
-            const result = move(characters[sInd], characters[dInd], source, destination);
+            console.log('tasks is: ', tasks);
+            console.log('source droppableId is: ', sInd);
+            console.log('tasks + sInd is: ', tasks[sInd]);
+            
+            const result = move(tasks[sInd], tasks[dInd], source, destination);
+            const newTasks = [...tasks];
+            newTasks[sInd] = result[sInd];
+            newTasks[dInd] = result[dInd];
+
+            setTasks(newTasks)
+
+            
+            
+            /* const result = move(characters[sInd], characters[dInd], source, destination);
             const newCharacters = [...characters];
             newCharacters[sInd] = result[sInd];
             newCharacters[dInd] = result[dInd];
       
-            updateCharacters(newCharacters.filter(group => group.length));
+            updateCharacters(newCharacters.filter(group => group.length)); */
           }
     }
 

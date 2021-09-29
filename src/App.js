@@ -64,8 +64,6 @@ const App = () => {
           <button type="submit">Submit task</button>
         </form>
         <KanbanContext />
-        <h2>Current tasks</h2>
-        <Tasks tasks={tasks} />
       </div>
       <br></br>
       <div className={styles.container}>
