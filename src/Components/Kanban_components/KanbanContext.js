@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-//import components
+//components
 import Column from './Column';
 
-//import services
+//modules
 import taskService from '../../Services/tasks';
 
 
@@ -20,6 +20,12 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     const result = {};
     result[droppableSource.droppableId] = sourceClone;
     result[droppableDestination.droppableId] = destClone;
+
+    taskService
+        .update(removed)
+        .then(
+            console.log('edit called')
+        )
 
     return result; 
 };
@@ -53,8 +59,6 @@ const KanbanContext = () => {
       }, [])
 
 
-    const [characters, updateCharacters] = useState(tasks);
-
     //function to save list order after movement. Adding movement between lists
     const handleOnDragEnd = (result) => {
         console.log('handleOnDragEnd init. Result is:', result);
@@ -78,20 +82,12 @@ const KanbanContext = () => {
             console.log('tasks + sInd is: ', tasks[sInd]);
             
             const result = move(tasks[sInd], tasks[dInd], source, destination);
+            console.log('result is: ', result[destination.index]);
             const newTasks = [...tasks];
             newTasks[sInd] = result[sInd];
             newTasks[dInd] = result[dInd];
 
             setTasks(newTasks)
-
-            
-            
-            /* const result = move(characters[sInd], characters[dInd], source, destination);
-            const newCharacters = [...characters];
-            newCharacters[sInd] = result[sInd];
-            newCharacters[dInd] = result[dInd];
-      
-            updateCharacters(newCharacters.filter(group => group.length)); */
           }
     }
 

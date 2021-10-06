@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/tasks'
+const baseUrl = 'http://localhost:3001/api/tasks'
 
 const getAll = () => {
     return axios.get(baseUrl)
@@ -9,16 +9,15 @@ const create = newObject => {
     return axios.post(baseUrl, newObject)
 }
 
-const edit = task => {
-    const id = task.id
-    const objectUrl = baseUrl + '/' + id
-    return axios.put(objectUrl, task)
+const update = (task) => {
+    const request = axios.put(`${baseUrl}/${task.id}`, task)
+    return request.then(response => response.data)
 }
 
 const taskService = {
     getAll,
     create,
-    edit
+    update
 }
 
 

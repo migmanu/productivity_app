@@ -18,10 +18,10 @@ const Column = (props) => {
         <Droppable droppableId={droppableId}>
             {(provided, snapshot) => (
                     <ul className="id" ref={provided.innerRef} {...provided.droppableProps} style={getColumnStyle(snapshot.isDraggingOver)}>
-                    {tasks.map(({id, task}, index) => {
+                    {tasks.map(({id, content}, index) => {
                         console.log('Card component called by Column');
                         return (
-                            <Card index={index} id={id} task={task} key={id} />
+                            <Card index={index} id={id} task={content} key={id} />
                         );
                     })}
                     {provided.placeholder}
