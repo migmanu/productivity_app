@@ -43,7 +43,7 @@ const reorder = (list, startIndex, endIndex) => {
 
 const KanbanContext = () => {
 
-    const [tasks, setTasks] = useState([[], []])
+    const [tasks, setTasks] = useState([[], [], []])
 
     useEffect(() => {
         taskService
@@ -52,7 +52,8 @@ const KanbanContext = () => {
             setTasks(
                 [
                     response.data.filter(task => task.column === 0),
-                    response.data.filter(task => task.column === 1)
+                    response.data.filter(task => task.column === 1),
+                    response.data.filter(task => task.column === 2)
                 ]
             )
           })
@@ -96,6 +97,7 @@ const KanbanContext = () => {
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 <Column droppableId="0" tasks={tasks[0]} />
                 <Column droppableId="1" tasks={tasks[1]} />
+                <Column droppableId="2" tasks={tasks[2]} />
             </DragDropContext>
         </div>
     )
