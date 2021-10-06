@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 //components
-import Tasks from './Components/Kanban_components/Tasks';
 import Timer from './Components/Pomodoro_components/Timer';
 import Pomodoro from './Components/Pomodoro_components/Pomodoro'
 import KanbanContext from './Components/Kanban_components/KanbanContext'
@@ -37,8 +36,8 @@ const App = () => {
     console.log('addTask init');
     const taskObject = {
       content: newTask,
+      column: 0,
       date: new Date(),
-      priority: Math.random() < 0.5,
     }
 
     taskService
