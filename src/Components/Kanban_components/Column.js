@@ -12,17 +12,15 @@ const getColumnStyle = isDraggingOver => ({
   });
 
 const Column = (props) => {
-    console.log('Column component init');
     const { droppableId, tasks } = props
 
     return (
         <Droppable droppableId={droppableId}>
             {(provided, snapshot) => (
                     <ul className="id" ref={provided.innerRef} {...provided.droppableProps} style={getColumnStyle(snapshot.isDraggingOver)}>
-                    {tasks.map(({id, content}, index) => {
-                        console.log('Card component called by Column');
+                    {tasks.map(({id, content, column}, index) => {
                         return (
-                            <Card index={index} id={id} task={content} key={id} />
+                            <Card index={index} id={id} content={content} key={id} column={column} />
                         );
                     })}
                     {provided.placeholder}
