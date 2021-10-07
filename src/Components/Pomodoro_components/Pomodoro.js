@@ -61,7 +61,7 @@ const Pomodoro = (props) => {
         <div>
             <div className={styles.buttons}>
                 <StartButton setIsActive={setIsActive} isActive={isActive} />
-                <button onClick={stopTimer} className={styles.reset}>Restart pomodoro</button>
+                <button onClick={stopTimer} className={styles.reset}>Restart</button>
             </div>
             <span className={styles.pomodoros}>Pomodoros: {pomodoros}</span>
         </div>

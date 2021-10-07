@@ -7,6 +7,9 @@ import Column from './Column';
 //modules
 import taskService from '../../Services/tasks';
 
+//styles
+import './kanban_styles.css'
+
 
 //function to move cards between columns
 const move = (source, destination, droppableSource, droppableDestination) => {
@@ -42,7 +45,6 @@ const reorder = (list, startIndex, endIndex) => {
 
 
 const KanbanContext = () => {
-
     const [tasks, setTasks] = useState([[], [], []])
 
     useEffect(() => {
@@ -93,7 +95,7 @@ const KanbanContext = () => {
     }
 
     return (
-        <div style={{ display: "flex" }}>
+        <div className="container">
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 <Column droppableId="0" tasks={tasks[0]} />
                 <Column droppableId="1" tasks={tasks[1]} />

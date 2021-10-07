@@ -1,0 +1,13 @@
+.header {
+    padding: 25px 0;
+    text-align: center;
+    color: #ffff;
+    font-size: large;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: rgb(26, 136, 163);
+}
+
+.header img {
+    width: 100px;
+    height: 13px;
+}

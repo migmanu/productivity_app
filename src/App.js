@@ -4,12 +4,13 @@ import React, { useState, useEffect } from "react";
 import Timer from './Components/Pomodoro_components/Timer';
 import Pomodoro from './Components/Pomodoro_components/Pomodoro'
 import KanbanContext from './Components/Kanban_components/KanbanContext'
+import Header from './Components/Header'
 
 //modules
 import taskService from "./Services/tasks";
 
 //styles
-import styles from './timer_styles.module.css'
+import styles from './Components/Pomodoro_components/timer_styles.module.css'
 
 const App = () => {
   const [tasks, setTasks] = useState([])
@@ -55,22 +56,16 @@ const App = () => {
 
   return (
     <div>
-      <h1>My first productivity App</h1>
-      <div>
-        <form onSubmit={addTask}>
-          <label htmlFor="input_task">Input task</label>{' '}
-          <input type="text" id="input_task" value={newTask} onChange={handleForm}></input>{' '}
-          <button type="submit">Submit task</button>
-        </form>
-        <KanbanContext />
-      </div>
-      <br></br>
       <div className={styles.container}>
         <Timer minutes={minutes} setMinutes={setMinutes} seconds={seconds} setSeconds={setSeconds}
         isActive={isActive} setIsActive={setIsActive} counter={counter} setCounter={setCounter} />
         <Pomodoro counter={counter} setCounter={setCounter} setMinutes={setMinutes} 
         setSeconds={setSeconds} isActive={isActive} setIsActive={setIsActive} 
         pomodoros={pomodoros} setPomodoros={setPomodoros} corte={corte} setCorte={setCorte} />
+      </div>
+
+      <div>
+        <KanbanContext />
       </div>
     </div>
   )

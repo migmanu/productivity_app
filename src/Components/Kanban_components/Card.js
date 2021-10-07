@@ -7,6 +7,7 @@ const getCardStyle = (isDragging, draggableStyle) => ({
     userSelect: "none",
     padding: grid * 2,
     margin: `0 0 ${grid}px 0`,
+    borderLeft: "5px solid pink",
   
     // change background colour if dragging
     background: isDragging ? "lightgreen" : "grey",

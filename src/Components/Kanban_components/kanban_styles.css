@@ -1,0 +1,20 @@
+.container {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    background: rgb(240, 235, 235);
+    padding: 1rem 3rem;
+}
+
+.column {
+    background-color: rgb(253, 247, 247);
+    width: 20%;
+    padding: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    list-style: none;
+}
+
+.card {
+    background: lightcoral;
+}

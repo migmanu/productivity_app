@@ -1,12 +1,13 @@
 import { Droppable } from 'react-beautiful-dnd';
 import Card from './Card'
 
-const grid = 8;
 
 const getColumnStyle = isDraggingOver => ({
     background: isDraggingOver ? "lightblue" : "lightgrey",
-    padding: grid,
-    width: 250,
+    padding: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    width: 300,
     listStyle: 'none'
   });
 
