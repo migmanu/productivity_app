@@ -1,5 +1,5 @@
 .container {
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     background: rgb(240, 235, 235);
@@ -13,6 +13,33 @@
     margin-left: 10%;
     margin-right: 10%;
     list-style: none;
+}
+
+.toDo {
+    color: rgb(240, 159, 173);
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 1%;
+    margin-bottom: 5%;
+}
+
+.doing {
+    color: blue;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 1%;
+    margin-bottom: 5%;
+}
+
+.done {
+    color: green;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 1%;
+    margin-bottom: 5%;
 }
 
 .card {

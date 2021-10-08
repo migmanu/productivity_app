@@ -11,7 +11,7 @@ const getCardStyle = (isDragging, draggableStyle, columnBorder) => ({
     borderLeft: columnBorder,
   
     // change background colour if dragging
-    background: isDragging ? "lightgreen" : "grey",
+    background: isDragging ? "lightgray" : "white",
   
     // styles we need to apply on draggables
     ...draggableStyle
