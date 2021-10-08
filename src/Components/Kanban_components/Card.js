@@ -18,7 +18,6 @@ const getCardStyle = (isDragging, draggableStyle, columnBorder) => ({
   });
 
 const Card = (props) => {
-    console.log('Card component init');
     const { index, id, content, column } = props
 
     let columnBorder = "5px solid black"

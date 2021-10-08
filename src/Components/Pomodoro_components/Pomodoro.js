@@ -16,7 +16,7 @@ const Pomodoro = (props) => {
             console.log('corte is false. Pomodoro started');
             setMinutes('25')
             setSeconds('00')
-            setCounter(2)
+            setCounter(1500)
             setCorte(true)
             console.log('pomodoros now is: ', pomodoros);
         }
@@ -26,7 +26,7 @@ const Pomodoro = (props) => {
             setPomodoros(pomodoros + 1)
             setMinutes('05')
             setSeconds('00')
-            setCounter(2)
+            setCounter(300)
             setCorte(false)
         }
 
@@ -35,7 +35,7 @@ const Pomodoro = (props) => {
             setPomodoros(pomodoros + 1)
             setMinutes('15')
             setSeconds('00')
-            setCounter(4)
+            setCounter(900)
             setCorte(false)
             console.log('long break started');
         }
@@ -45,14 +45,14 @@ const Pomodoro = (props) => {
             setPomodoros(0)
             setMinutes('25')
             setSeconds('00')
-            setCounter(2)
+            setCounter(1500)
             setCorte(true)
         }
     }, [isActive])
 
     const stopTimer = () => {
         setIsActive(false)
-        setCounter(2)
+        setCounter(1500)
         setMinutes('25')
         setSeconds('00')
     }

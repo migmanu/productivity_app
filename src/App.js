@@ -20,7 +20,7 @@ const App = () => {
   const [minutes, setMinutes] = useState('25')
   const [seconds, setSeconds] = useState('00')
   const [isActive, setIsActive] = useState(false)
-  const [counter, setCounter] = useState(2) //used to count passed time in pomodoro cycle
+  const [counter, setCounter] = useState(1500) //used to count passed time in pomodoro cycle
   const [pomodoros, setPomodoros] = useState(0) //used to count number of pomodoro cycles
   const [corte, setCorte] = useState(true) //use to control when on pomodoro and when on break
 
