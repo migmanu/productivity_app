@@ -7,9 +7,6 @@ import KanbanContext from './Components/Kanban_components/KanbanContext'
 //modules
 import taskService from "./Services/tasks";
 
-//styles
-import styles from './Components/Pomodoro_components/timer_styles.module.css'
-
 const App = () => {
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState("")
@@ -22,7 +19,7 @@ const App = () => {
       })
   }, [])
 
-  const addTask = (event) => {
+  const addTask = (event) => { //left only to copy later
     event.preventDefault()
     console.log('addTask init');
     const taskObject = {
@@ -38,10 +35,6 @@ const App = () => {
         setTasks(tasks.concat(response.data))
         setNewTask('')
       })
-  }
-
-  const handleForm = (event) => {
-    setNewTask(event.target.value)
   }
 
   return (
