@@ -30,12 +30,11 @@ const Column = (props) => {
     }
 
     return (
-        <Droppable droppableId={droppableId}>
-            {(provided, snapshot) => (
-                    <ul className="id" ref={provided.innerRef} {...provided.droppableProps} style={getColumnStyle(snapshot.isDraggingOver)}>
-                        <p className={titleStyle}>
-                            {title}
-                        </p>
+        <div>
+            <p className={titleStyle}> {title}</p>
+            <Droppable droppableId={droppableId}>
+                {(provided, snapshot) => (
+                    <ul className="id" ref={provided.innerRef} {...provided.droppableProps} style={getColumnStyle(snapshot.isDraggingOver)}>                      
                     {tasks.map(({id, content, column}, index) => {
                         return (
                             <Card index={index} id={id} content={content} key={id} column={column} />
@@ -44,7 +43,9 @@ const Column = (props) => {
                     {provided.placeholder}
                     </ul>
                 )}
-        </Droppable>
+            </Droppable>
+        </div>
+        
     )
 }
 

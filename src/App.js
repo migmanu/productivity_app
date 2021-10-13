@@ -46,7 +46,7 @@ const App = () => {
 
   return (
     <div>
-      <div className={styles.upperBar}>
+      <div>
         <Pomodoro />
       </div>
 

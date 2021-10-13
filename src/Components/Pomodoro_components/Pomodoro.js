@@ -61,7 +61,7 @@ const Pomodoro = (props) => {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={styles.upperBar}>
             <div>
                 <Timer minutes={minutes} setMinutes={setMinutes} seconds={seconds} 
                 setSeconds={setSeconds} isActive={isActive} 
@@ -71,7 +71,7 @@ const Pomodoro = (props) => {
                 <StartButton setIsActive={setIsActive} isActive={isActive} />
                 <button onClick={stopTimer} className={styles.reset}>Restart</button>
             </div>
-            <span className={styles.pomodoros}>Pomodoros: {pomodoros}</span>
+            <span className={styles.pomodoros}>Pomodoros {pomodoros}</span>
         </div>
     )
 }
