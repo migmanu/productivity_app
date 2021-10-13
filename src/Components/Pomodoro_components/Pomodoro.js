@@ -1,12 +1,15 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import StartButton from './StartButton'
 import styles from './timer_styles.module.css'
+import Timer from './Timer'
 
 const Pomodoro = (props) => {
-    const { counter, setCounter, setMinutes, setSeconds, 
-        isActive, setIsActive, pomodoros, setPomodoros, corte, setCorte } = props
-
-    
+    const [minutes, setMinutes] = useState('25')
+    const [seconds, setSeconds] = useState('00')
+    const [isActive, setIsActive] = useState(false)
+    const [counter, setCounter] = useState(1500) //used to count passed time in pomodoro cycle
+    const [pomodoros, setPomodoros] = useState(0) //used to count number of pomodoro cycles
+    const [corte, setCorte] = useState(true) //use to control when on pomodoro and when on break
 
     useEffect(() => {
         console.log('Pomodoro component useEffect init');
@@ -58,7 +61,12 @@ const Pomodoro = (props) => {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
+            <div>
+                <Timer minutes={minutes} setMinutes={setMinutes} seconds={seconds} 
+                setSeconds={setSeconds} isActive={isActive} 
+                setIsActive={setIsActive} counter={counter} setCounter={setCounter} />
+            </div>
             <div className={styles.buttons}>
                 <StartButton setIsActive={setIsActive} isActive={isActive} />
                 <button onClick={stopTimer} className={styles.reset}>Restart</button>
