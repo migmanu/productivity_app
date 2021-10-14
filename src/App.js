@@ -7,6 +7,9 @@ import KanbanContext from './Components/Kanban_components/KanbanContext'
 //modules
 import taskService from "./Services/tasks";
 
+//styles
+import './App.css'
+
 const App = () => {
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState("")
@@ -38,11 +41,10 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className="body">
       <div>
         <Pomodoro />
       </div>
-
       <div>
         <KanbanContext />
       </div>

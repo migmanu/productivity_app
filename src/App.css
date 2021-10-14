@@ -1,0 +1,10 @@
+.body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: black;
+    position: relative;
+    bottom: 8px;
+    right: 8px;
+    width: 101.5%;
+}
