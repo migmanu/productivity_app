@@ -11,6 +11,7 @@ const create = newObject => {
 
 const update = (task) => {
     const request = axios.put(`${baseUrl}/${task.id}`, task)
+    console.log('request is: ', `${baseUrl}/${task.id}`);
     return request.then(response => response.data)
 }
 

@@ -16,13 +16,18 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     console.log('move function init');
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
-    const [removed] = sourceClone.splice(droppableSource.index, 1);
+    let [removed] = sourceClone.splice(droppableSource.index, 1);
+    console.log('removed is: ', removed);
 
     destClone.splice(droppableDestination.index, 0, removed);
 
     const result = {};
     result[droppableSource.droppableId] = sourceClone;
     result[droppableDestination.droppableId] = destClone;
+    
+    removed.column = parseInt(droppableDestination.droppableId)
+    console.log('destination is: ', droppableDestination);
+    console.log('edited removed is: ', removed);
 
     taskService
         .update(removed)
@@ -35,7 +40,6 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 
 //function to reorder cards moved inside same column
 const reorder = (list, startIndex, endIndex) => {
-    console.log('reorder function init');
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -64,15 +68,12 @@ const KanbanContext = () => {
 
     //function to save list order after movement. Adding movement between lists
     const handleOnDragEnd = (result) => {
-        console.log('handleOnDragEnd init. Result is:', result);
         const { source, destination } = result;
 
         if (!destination) return;
 
         const sInd = +source.droppableId;
         const dInd = +destination.droppableId;
-
-        console.log('sInd is:', sInd, 'dInd is: ', dInd);
 
         if (sInd === dInd) { //card moved inside same column
             const items = reorder(tasks[sInd], source.index, destination.index);
@@ -85,7 +86,7 @@ const KanbanContext = () => {
             console.log('tasks + sInd is: ', tasks[sInd]);
             
             const result = move(tasks[sInd], tasks[dInd], source, destination);
-            console.log('result is: ', result[destination.index]);
+            console.log('result is: ', result[dInd][destination.index]);
             const newTasks = [...tasks];
             newTasks[sInd] = result[sInd];
             newTasks[dInd] = result[dInd];

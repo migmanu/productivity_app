@@ -10,7 +10,9 @@ const getColumnStyle = isDraggingOver => ({
     width: 300,
     listStyle: 'none',
     height: 500,
-    overflowX: 'scroll'
+    maxHeight: 500,
+    overflowY: 'auto',
+    overflowX: 'hidden'
   });
 
 const Column = (props) => {
