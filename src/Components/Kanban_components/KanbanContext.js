@@ -13,22 +13,17 @@ import './kanban_styles.css'
 
 //function to move cards between columns
 const move = (source, destination, droppableSource, droppableDestination) => {
-    console.log('move function init');
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
     let [removed] = sourceClone.splice(droppableSource.index, 1);
-    console.log('removed is: ', removed);
+    removed.column = parseInt(droppableDestination.droppableId) //update card's column field
 
-    destClone.splice(droppableDestination.index, 0, removed);
+    destClone.splice(droppableDestination.index, 0, removed); //move card to new column
 
     const result = {};
     result[droppableSource.droppableId] = sourceClone;
     result[droppableDestination.droppableId] = destClone;
     
-    removed.column = parseInt(droppableDestination.droppableId)
-    console.log('destination is: ', droppableDestination);
-    console.log('edited removed is: ', removed);
-
     taskService
         .update(removed)
         .then(
@@ -47,6 +42,29 @@ const reorder = (list, startIndex, endIndex) => {
     return result;
 };
 
+//update indexes in server after card movement between or into columns
+const updateIndex = (newTasks, columnNumber) => {
+    let index = 0
+
+    newTasks[columnNumber].forEach(task => {
+        if (index < newTasks[columnNumber].length) {
+            const newTask = {
+                id: task.id,
+                content: task.content,
+                date: task.date,
+                column: columnNumber,
+                position: index
+            }
+            taskService
+                .update(newTask)
+                .then(
+                    console.log(`task ${newTask.content} updated with position ${newTask.position} `)
+                )
+            index += 1
+        }
+    })
+}
+
 
 const KanbanContext = () => {
     const [tasks, setTasks] = useState([[], [], []])
@@ -55,11 +73,20 @@ const KanbanContext = () => {
         taskService
           .getAll()
           .then(response => {
-            setTasks(
+              console.log(response);
+            const toDo = response.data.filter(task => task.column === 0)
+            toDo.sort((a, b) => a.position-b.position)
+
+            const doing = response.data.filter(task => task.column === 1)
+            doing.sort((a, b) => a.position-b.position)
+
+            const done = response.data.filter(task => task.column === 2)
+            done.sort((a, b) => a.position-b.position)
+              setTasks(
                 [
-                    response.data.filter(task => task.column === 0),
-                    response.data.filter(task => task.column === 1),
-                    response.data.filter(task => task.column === 2)
+                    toDo,
+                    doing,
+                    done
                 ]
             )
           })
@@ -79,19 +106,20 @@ const KanbanContext = () => {
             const items = reorder(tasks[sInd], source.index, destination.index);
             const newTasks = [...tasks];
             newTasks[sInd] = items;
+            updateIndex(newTasks, sInd)
             setTasks(newTasks);
           } else { //card moved to another column
-            console.log('tasks is: ', tasks);
-            console.log('source droppableId is: ', sInd);
-            console.log('tasks + sInd is: ', tasks[sInd]);
-            
             const result = move(tasks[sInd], tasks[dInd], source, destination);
-            console.log('result is: ', result[dInd][destination.index]);
             const newTasks = [...tasks];
             newTasks[sInd] = result[sInd];
             newTasks[dInd] = result[dInd];
 
+            updateIndex(newTasks, sInd)
+            updateIndex(newTasks, dInd)
+
             setTasks(newTasks)
+
+            
           }
     }
 
