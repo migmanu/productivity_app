@@ -14,16 +14,10 @@ const update = (task) => {
     return request.then(response => response.data)
 }
 
-const updateAll = (tasks) => {
-    const request = axios.put(baseUrl, tasks)
-    return request.then(response => response.data)
-}
-
 const taskService = {
     getAll,
     create,
-    update,
-    updateAll
+    update
 }
 
 
