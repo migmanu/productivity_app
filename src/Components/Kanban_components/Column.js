@@ -1,5 +1,6 @@
 import { Droppable } from 'react-beautiful-dnd';
 import Card from './Card'
+import NewCard from './NewCard';
 
 
 const getColumnStyle = isDraggingOver => ({
@@ -39,6 +40,7 @@ const Column = (props) => {
             <Droppable droppableId={droppableId}>
                 {(provided, snapshot) => (
                     <ul className="id" ref={provided.innerRef} {...provided.droppableProps} style={getColumnStyle(snapshot.isDraggingOver)}>                      
+                    <NewCard droppableId={droppableId} />
                     {tasks.map(({id, content, column}, index) => {
                         return (
                             <Card index={index} id={id} content={content} key={id} column={column} />

@@ -47,3 +47,28 @@
 .card {
     background: lightcoral;
 }
+
+.addCardButton {
+    width:25px;
+    height:25px;
+    color:rgb(54, 50, 50);
+    line-height: 24px;
+    position:relative;
+    margin-left: 90%;
+    border: 0ch;
+    font-size: larger;
+    }
+.addCardButton::before {
+    content: "+"
+}
+
+.newCardBox {
+    display: flex;
+    user-select: none;
+    padding: 16px;
+    margin-bottom: 8px;
+    width: 88%;
+    max-width: 100%;
+    border-radius: 5%;
+    background: white;
+}
