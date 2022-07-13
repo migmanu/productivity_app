@@ -2,6 +2,8 @@
 
 This is a personal project meant to practise Full Stack skills. This means integrating different libraries, working with APIs and managing the storage of data in MongoDB.
 
+You can check the online version [here](https://ancient-castle-89334.herokuapp.com/)
+
 It uses the following technologies:
 - JavaScript
 - React
