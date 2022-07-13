@@ -6,45 +6,70 @@ const grid = 8;
 
 
 const getCardStyle = (height) => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: "none",
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
-    borderRadius: 5,
-    width: 265,
-    maxWidth: 265,
-    minWidth: 265,
-    maxHeight: 200,
-    minHeight: 20,
-    overflowY: 'scroll',
-    overflowX: 'hidden'
-  });
+  // some basic styles to make the items look a bit nicer
+  userSelect: "none",
+  padding: grid * 2,
+  margin: `0 0 ${grid}px 0`,
+  borderRadius: 5,
+  width: 265,
+  maxWidth: 265,
+  minWidth: 265,
+  maxHeight: 200,
+  minHeight: 20,
+  overflowY: 'scroll',
+  overflowX: 'hidden'
+});
 
 const NewCard = (props) => {
+  const { droppableId, setTasks } = props
   console.log('new card component init');
   const [addCard, setAddCard] = useState(false)
   const [newTask, setNewTask] = useState("")
   console.log('addCard is:', addCard);
-  
-  const submitNewCard = (event) => {
+
+  const handleSubmitNewCard = (event) => {
     console.log('submitNewCard form init');
-  
+
     event.preventDefault()
-      const taskObject = {
-        content: newTask,
-        date: new Date(),
-        column: props.droppableId,
-        position: 0
-      }
-  
-      taskService
-        .create(taskObject)
-        .then(response => {
-          console.log('task saved to local server');
-        })
+    const taskObject = {
+      content: newTask,
+      date: new Date(),
+      column: droppableId,
+      position: 0
+    }
+
+    taskService
+      .create(taskObject)
+      .then(response => {
+        console.log('task saved to local server');
+        console.log(`response is: ${response}`)
+        setAddCard(false)
+        console.log(` addCard is now: ${addCard}`)
+      })
+    taskService
+      .getAll()
+      .then(response => {
+        console.log(response);
+        const toDo = response.data.filter(task => task.column === 0)
+        toDo.sort((a, b) => a.position - b.position)
+
+        const doing = response.data.filter(task => task.column === 1)
+        doing.sort((a, b) => a.position - b.position)
+
+        const done = response.data.filter(task => task.column === 2)
+        done.sort((a, b) => a.position - b.position)
+        setTasks(
+          [
+            toDo,
+            doing,
+            done
+          ]
+        )
+      })
   }
 
   const handleClick = (event) => {
+    // function used solely to change the state of addCard and thus display or hide the NewCard text filed.
     event.preventDefault()
     console.log('handleClick function init, addCard is: ', addCard);
     setAddCard(!addCard)
@@ -69,7 +94,7 @@ const NewCard = (props) => {
           <textarea type="textarea" style={getCardStyle()} rows={
             (newTask.length === 0) ? 1 : Math.ceil(newTask.length / 33)}
             placeholder='New task...' onChange={handleChange}></textarea>
-          <button>Add</button> <button onClick={handleClick}>Cancel</button>
+          <button onClick={handleSubmitNewCard} className="submitCardButton">Add</button> <button onClick={handleClick}>Cancel</button>
         </div>
       </li>
     )
