@@ -1,6 +1,6 @@
 # Productivity App
 
-This is a personal project meant to practise Full Stack skills.
+This is a personal project meant to practise Full Stack skills. This means integrating different libraries, working with APIs and managing the storage of data in MongoDB.
 
 It uses the following technologies:
 - JavaScript
@@ -24,7 +24,7 @@ The first component is a simple pomodoro timer set to the most common style: 4 X
 
 A restart button is also included. So far there is yet no option for setting up different time periods.
 
-## kanban Board
+## Kanban Board
 
 The Kanban Board uses 'react-beatutiful-dnd' library to achieve drag and drop within columns. It is also integrated to MongoDB, where cards are stored and fetched from.
 
