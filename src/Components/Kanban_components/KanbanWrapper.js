@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 //components
@@ -10,12 +10,8 @@ import taskService from '../../Services/tasks';
 //styles
 import './kanban_styles.css'
 
-// create Kanban Context
-export const KanbanContext = createContext();
-
-
-
-
+// context
+import { KanbanContext } from '../../App.js'
 
 //function to move cards between columns
 const move = (source, destination, droppableSource, droppableDestination) => {
@@ -73,30 +69,9 @@ const updateIndex = (newTasks, columnNumber) => {
 
 
 const KanbanWrapper = () => {
-  const [tasks, setTasks] = useState([[], [], []])
+  const { tasks, setTasks} = useContext(KanbanContext);
 
-  useEffect(() => {
-    taskService
-      .getAll()
-      .then(response => {
-        console.log(response);
-        const toDo = response.data.filter(task => task.column === 0)
-        toDo.sort((a, b) => a.position - b.position)
-
-        const doing = response.data.filter(task => task.column === 1)
-        doing.sort((a, b) => a.position - b.position)
-
-        const done = response.data.filter(task => task.column === 2)
-        done.sort((a, b) => a.position - b.position)
-        setTasks(
-          [
-            toDo,
-            doing,
-            done
-          ]
-        )
-      })
-  }, [])
+  
 
 
   //function to save list order after movement. Adding movement between lists
