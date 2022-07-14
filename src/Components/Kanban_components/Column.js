@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import { Droppable } from 'react-beautiful-dnd';
 import Card from './Card'
 import NewCard from './NewCard';
 
+import { KanbanContext } from '../../App.js'
 
 const getColumnStyle = isDraggingOver => ({
   background: isDraggingOver ? "lightblue" : "rgb(240, 235, 235)",
@@ -17,7 +19,9 @@ const getColumnStyle = isDraggingOver => ({
 });
 
 const Column = (props) => {
-  const { droppableId, tasks, setTasks } = props
+  const { droppableId } = props
+  const { tasks, setTasks } = useContext(KanbanContext);
+  const columnTasks = tasks[droppableId]
 
   let title = ''
   let titleStyle = ''
@@ -41,7 +45,7 @@ const Column = (props) => {
         {(provided, snapshot) => (
           <ul className="id" ref={provided.innerRef} {...provided.droppableProps} style={getColumnStyle(snapshot.isDraggingOver)}>
             <NewCard droppableId={droppableId} />
-            {tasks.map(({ id, content, column }, index) => {
+            {columnTasks.map(({ id, content, column }, index) => {
               return (
                 <Card index={index} id={id} content={content} key={id} column={column} />
               );
