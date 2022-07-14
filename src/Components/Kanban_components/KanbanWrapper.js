@@ -71,8 +71,6 @@ const updateIndex = (newTasks, columnNumber) => {
 const KanbanWrapper = () => {
   const { tasks, setTasks} = useContext(KanbanContext);
 
-  
-
 
   //function to save list order after movement. Adding movement between lists
   const handleOnDragEnd = (result) => {
