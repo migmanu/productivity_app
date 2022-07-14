@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 //components
 import Pomodoro from './Components/Pomodoro_components/Pomodoro'
-import KanbanContext from './Components/Kanban_components/KanbanContext'
+import KanbanWrapper from './Components/Kanban_components/KanbanWrapper'
 
 //modules
 import taskService from "./Services/tasks";
@@ -46,7 +46,7 @@ const App = () => {
         <Pomodoro />
       </div>
       <div>
-        <KanbanContext />
+        <KanbanWrapper />
       </div>
     </div>
   )

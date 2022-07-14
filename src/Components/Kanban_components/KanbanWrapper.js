@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 //components
@@ -9,6 +9,12 @@ import taskService from '../../Services/tasks';
 
 //styles
 import './kanban_styles.css'
+
+// create Kanban Context
+export const KanbanData = createContext();
+
+
+
 
 
 //function to move cards between columns
