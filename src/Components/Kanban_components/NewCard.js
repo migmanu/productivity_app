@@ -1,6 +1,8 @@
-import { useState } from "react";
-import taskService from "../../Services/tasks";
+import { useState, useContext } from "react";
+import taskService from "../../Services/tasks.js";
 import './kanban_styles.css'
+
+import { KanbanContext } from '../../App.js'
 
 const grid = 8;
 
@@ -21,7 +23,8 @@ const getCardStyle = (height) => ({
 });
 
 const NewCard = (props) => {
-  const { droppableId, setTasks } = props
+  const { droppableId } = props
+  const { tasks, setTasks } = useContext(KanbanContext);
   console.log('new card component init');
   const [addCard, setAddCard] = useState(false)
   const [newTask, setNewTask] = useState("")
@@ -38,6 +41,11 @@ const NewCard = (props) => {
       position: 0
     }
 
+    const newTasksArray = tasks
+    console.log(`newTasksArray is ${newTasksArray}`)
+
+    let newCardID
+
     taskService
       .create(taskObject)
       .then(response => {
@@ -45,6 +53,8 @@ const NewCard = (props) => {
         console.log(`response is: ${response}`)
         setAddCard(false)
         console.log(` addCard is now: ${addCard}`)
+        newCardID = response.id
+        console.log(`new id is ${response}`)
       })
     taskService
       .getAll()
