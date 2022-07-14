@@ -105,9 +105,9 @@ const KanbanWrapper = () => {
   return (
     <div className="container">
       <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Column droppableId="0" tasks={tasks[0]} setTasks={setTasks} />
-        <Column droppableId="1" tasks={tasks[1]} setTasks={setTasks} />
-        <Column droppableId="2" tasks={tasks[2]} setTasks={setTasks} />
+        <Column droppableId="0" />
+        <Column droppableId="1" />
+        <Column droppableId="2" />
       </DragDropContext>
     </div>
   )
