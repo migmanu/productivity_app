@@ -11,7 +11,7 @@ import taskService from '../../Services/tasks';
 import './kanban_styles.css'
 
 // create Kanban Context
-export const KanbanData = createContext();
+export const KanbanContext = createContext();
 
 
 
