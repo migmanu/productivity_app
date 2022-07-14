@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer, createContext } from "react";
 
 //components
 import Pomodoro from './Components/Pomodoro_components/Pomodoro'
@@ -10,35 +10,15 @@ import taskService from "./Services/tasks";
 //styles
 import './App.css'
 
+// manage kanban context
+export const KanbanContext = createContext();
+
+function reducer(state, item) {
+  return [...state, item]
+}
+
 const App = () => {
-  const [tasks, setTasks] = useState([])
-  const [newTask, setNewTask] = useState("")
-
-  useEffect(() => {
-    taskService
-      .getAll()
-      .then(response => {
-        setTasks(response.data)
-      })
-  }, [])
-
-  const addTask = (event) => { //left only to copy later
-    event.preventDefault()
-    console.log('addTask init');
-    const taskObject = {
-      content: newTask,
-      column: 0,
-      date: new Date(),
-    }
-
-    taskService
-      .create(taskObject)
-      .then(response => {
-        console.log('task saved to local server');
-        setTasks(tasks.concat(response.data))
-        setNewTask('')
-      })
-  }
+  const [tasks, setTasks] = useReducer([])
 
   return (
     <div className="body">
