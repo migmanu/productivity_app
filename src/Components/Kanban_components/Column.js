@@ -40,7 +40,7 @@ const Column = (props) => {
       <Droppable droppableId={droppableId}>
         {(provided, snapshot) => (
           <ul className="id" ref={provided.innerRef} {...provided.droppableProps} style={getColumnStyle(snapshot.isDraggingOver)}>
-            <NewCard droppableId={droppableId} setTasks={setTasks} />
+            <NewCard droppableId={droppableId} />
             {tasks.map(({ id, content, column }, index) => {
               return (
                 <Card index={index} id={id} content={content} key={id} column={column} />
