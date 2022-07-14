@@ -72,7 +72,7 @@ const updateIndex = (newTasks, columnNumber) => {
 }
 
 
-const KanbanContext = () => {
+const KanbanWrapper = () => {
   const [tasks, setTasks] = useState([[], [], []])
 
   useEffect(() => {
@@ -140,4 +140,4 @@ const KanbanContext = () => {
   )
 }
 
-export default KanbanContext
+export default KanbanWrapper
