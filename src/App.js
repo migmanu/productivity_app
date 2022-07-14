@@ -4,30 +4,52 @@ import React, { useState, useEffect, useReducer, createContext } from "react";
 import Pomodoro from './Components/Pomodoro_components/Pomodoro'
 import KanbanWrapper from './Components/Kanban_components/KanbanWrapper'
 
-//modules
-import taskService from "./Services/tasks";
-
 //styles
 import './App.css'
+
+import taskService from './Services/tasks.js';
+
 
 // manage kanban context
 export const KanbanContext = createContext();
 
-function reducer(state, item) {
-  return [...state, item]
-}
 
 const App = () => {
-  const [tasks, setTasks] = useReducer([])
+  const [tasks, setTasks] = useState([[], [], []])
+
+  useEffect(() => {
+    taskService
+      .getAll()
+      .then(response => {
+        console.log(response);
+        const toDo = response.data.filter(task => task.column === 0)
+        toDo.sort((a, b) => a.position - b.position)
+
+        const doing = response.data.filter(task => task.column === 1)
+        doing.sort((a, b) => a.position - b.position)
+
+        const done = response.data.filter(task => task.column === 2)
+        done.sort((a, b) => a.position - b.position)
+        setTasks(
+          [
+            toDo,
+            doing,
+            done
+          ]
+        )
+      })
+  }, [])
+
+
 
   return (
     <div className="body">
       <div>
         <Pomodoro />
       </div>
-      <div>
+      <KanbanContext.Provider value={{ tasks, setTasks }}>
         <KanbanWrapper />
-      </div>
+      </KanbanContext.Provider>
     </div>
   )
 }
