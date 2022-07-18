@@ -46,7 +46,7 @@ const reorder = (list, startIndex, endIndex) => {
 
 //update indexes in server after card movement between or into columns
 const updateIndex = (newTasks, columnNumber) => {
-  let index = 1
+  let index = 0
 
   newTasks[columnNumber].forEach(task => {
     if (index < newTasks[columnNumber].length) {
