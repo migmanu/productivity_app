@@ -2,18 +2,15 @@ import { useContext } from "react";
 import { Droppable } from 'react-beautiful-dnd';
 import Card from './Card'
 import NewCard from './NewCard';
-
+import styles from './kanban_styles.css'
 import { KanbanContext } from '../../App.js'
 
 const getColumnStyle = isDraggingOver => ({
   background: isDraggingOver ? "lightblue" : "rgb(240, 235, 235)",
   padding: 5,
-  marginLeft: 70,
-  marginRight: 10,
-  width: 300,
+  width: '100%',
   listStyle: 'none',
-  height: 500,
-  maxHeight: 500,
+  maxHeight: '60%',
   overflowY: 'auto',
   overflowX: 'hidden'
 });
@@ -39,12 +36,14 @@ const Column = (props) => {
   }
 
   return (
-    <div>
+    <div className="kanbanColumn">
       <p className={titleStyle}> {title}</p>
+      <div>
+        <NewCard droppableId={droppableId} />
+      </div>
       <Droppable droppableId={droppableId}>
         {(provided, snapshot) => (
           <ul className="id" ref={provided.innerRef} {...provided.droppableProps} style={getColumnStyle(snapshot.isDraggingOver)}>
-            <NewCard droppableId={droppableId} />
             {columnTasks.map(({ id, content, column }, index) => {
               return (
                 <Card index={index} id={id} content={content} key={id} column={column} />
