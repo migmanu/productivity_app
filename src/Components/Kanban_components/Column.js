@@ -6,11 +6,10 @@ import styles from './kanban_styles.css'
 import { KanbanContext } from '../../App.js'
 
 const getColumnStyle = isDraggingOver => ({
-  background: isDraggingOver ? "lightblue" : "rgb(240, 235, 235)",
+  background: isDraggingOver ? "lightblue" : "none",
   padding: 5,
-  width: '100%',
   listStyle: 'none',
-  maxHeight: '60%',
+  maxHeight: '95%',
   overflowY: 'auto',
   overflowX: 'hidden'
 });
@@ -21,36 +20,34 @@ const Column = (props) => {
   const columnTasks = tasks[droppableId]
 
   let title = ''
-  let titleStyle = ''
   if (droppableId === '0') {
     title = 'To-do'
-    titleStyle = 'toDo'
   }
   if (droppableId === '1') {
     title = 'Doing'
-    titleStyle = "doing"
   }
   if (droppableId === '2') {
     title = 'Done'
-    titleStyle = "done"
   }
 
   return (
     <div className="kanbanColumn">
-      <p className={titleStyle}> {title}</p>
+      <p className="columnTitle"> {title}</p>
       <div>
         <NewCard droppableId={droppableId} />
       </div>
       <Droppable droppableId={droppableId}>
         {(provided, snapshot) => (
-          <ul className="id" ref={provided.innerRef} {...provided.droppableProps} style={getColumnStyle(snapshot.isDraggingOver)}>
-            {columnTasks.map(({ id, content, column }, index) => {
-              return (
-                <Card index={index} id={id} content={content} key={id} column={column} />
-              );
-            })}
+          <div className="listWrapper" ref={provided.innerRef} {...provided.droppableProps} >
+            <ul className="id" style={getColumnStyle(snapshot.isDraggingOver)}>
+              {columnTasks.map(({ id, content, column }, index) => {
+                return (
+                  <Card index={index} id={id} content={content} key={id} column={column} />
+                );
+              })}
+            </ul>
             {provided.placeholder}
-          </ul>
+          </div>
         )}
       </Droppable>
     </div>

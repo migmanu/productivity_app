@@ -13,14 +13,32 @@ const getCardStyle = (height) => ({
   padding: grid * 2,
   margin: `0 0 ${grid}px 0`,
   borderRadius: 5,
-  width: 265,
-  maxWidth: 265,
-  minWidth: 265,
-  maxHeight: 200,
-  minHeight: 20,
   overflowY: 'scroll',
   overflowX: 'hidden'
 });
+
+const updateIndex = (tasksList, id) => {
+  let index = 1
+
+  tasksList.forEach(task => {
+    if (task.id !== id) {
+      const newTask = {
+        id: task.id,
+        content: task.content,
+        date: task.date,
+        column: task.column,
+        position: index
+      }
+      taskService
+        .update(newTask)
+        .then(
+          console.log(`task ${newTask.content} updated with position ${newTask.position} `)
+        )
+      index += 1
+    }
+  })
+}
+
 
 const NewCard = (props) => {
   const { droppableId } = props
@@ -50,17 +68,17 @@ const NewCard = (props) => {
       .create(taskObject)
       .then(response => {
         console.log('task saved to local server');
-        console.log(`response is: ${response}`)
         setAddCard(false)
-        console.log(` addCard is now: ${addCard}`)
         newCardID = response.id
-        console.log(`new id is ${response}`)
       })
     taskService
       .getAll()
       .then(response => {
+        console.log(`newCardID accesible in get: ${newCardID}`)
         console.log(response);
-        const toDo = response.data.filter(task => task.column === 0)
+        let toDo = response.data.filter(task => task.column === 0)
+        updateIndex(toDo, newCardID)
+
         toDo.sort((a, b) => a.position - b.position)
 
         const doing = response.data.filter(task => task.column === 1)
@@ -91,22 +109,19 @@ const NewCard = (props) => {
 
   if (addCard === false) {
     return (
-      <li><button onClick={handleClick} className='addCardButton'></button></li>
+      <div><button onClick={handleClick} className='addCardButton'>+</button></div>
     )
   }
 
   if (addCard === true) {
     console.log('newTask.length is: ', newTask.length, 'operand: ', Math.ceil(newTask.length / 33))
     return (
-      <li>
-        <button onClick={handleClick} className='addCardButton'></button>
-        <div>
-          <textarea type="textarea" style={getCardStyle()} rows={
-            (newTask.length === 0) ? 1 : Math.ceil(newTask.length / 33)}
-            placeholder='New task...' onChange={handleChange}></textarea>
-          <button onClick={handleSubmitNewCard} className="submitCardButton">Add</button> <button onClick={handleClick}>Cancel</button>
-        </div>
-      </li>
+      <div className="newCardWrapper">
+        <textarea type="textarea" rows={
+          (newTask.length === 0) ? 1 : Math.ceil(newTask.length / 33)}
+          placeholder='New task...' onChange={handleChange}></textarea>
+        <button onClick={handleSubmitNewCard} className="submitCardButton">Add</button> <button onClick={handleClick}>Cancel</button>
+      </div>
     )
   }
 }

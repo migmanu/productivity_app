@@ -1,10 +1,7 @@
-.body {
+body {
     margin: 0;
+    height: 100%;
     padding: 0;
     border: 0;
-    background: rgb(240, 235, 235);
-    position: relative;
-    bottom: 8px;
-    right: 8px;
-    width: 101.5%;
+    background: black;
 }

@@ -8,7 +8,7 @@ import Column from './Column';
 import taskService from '../../Services/tasks';
 
 //styles
-import './kanban_styles.css'
+import styles from './kanban_styles.css'
 
 // context
 import { KanbanContext } from '../../App.js'
@@ -69,7 +69,7 @@ const updateIndex = (newTasks, columnNumber) => {
 
 
 const KanbanWrapper = () => {
-  const { tasks, setTasks} = useContext(KanbanContext);
+  const { tasks, setTasks } = useContext(KanbanContext);
 
 
   //function to save list order after movement. Adding movement between lists

@@ -1,47 +1,31 @@
 .container {
-    width: 100%;
-    height: 100%;
+    max-height: 80vh;
+    width: 80%;
+    padding: 1%;
     margin: 0 auto;
     display: flex;
-    background: rgb(240, 235, 235);
 
 }
 
-.column {
-    background-color: rgb(253, 247, 247);
-    width: 20%;
-    height: 100px;
-    padding: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
-    list-style: none;
+.kanbanColumn {
+    width: 30%;
+    margin-left: 1%;
 }
 
-.toDo {
-    color: rgb(240, 159, 173);
-    text-align: center;
-    font-size: 30px;
-    font-weight: 700;
-    margin-top: 1%;
-    margin-bottom: 5%;
+.columnTitle {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
 }
 
-.doing {
-    color: blue;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 700;
-    margin-top: 1%;
-    margin-bottom: 5%;
-}
-
-.done {
-    color: green;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 700;
-    margin-top: 1%;
-    margin-bottom: 5%;
+.listWrapper {
+  height: 90%;
+  padding: 1%;
+  background-color: #272626;
+  list-style: none;
+  border: 0.5px solid white;
+  border-radius: 1%;
 }
 
 .card {
@@ -49,26 +33,14 @@
 }
 
 .addCardButton {
-    width:25px;
-    height:25px;
-    color:rgb(54, 50, 50);
+    background-color: black;
+    width:40px;
+    height:40px;
+    color: white;
     line-height: 24px;
-    position:relative;
-    margin-left: 90%;
     border: 0ch;
-    font-size: larger;
+    font-size: 30px;
+    cursor: pointer;
     }
-.addCardButton::before {
-    content: "+"
-}
 
-.newCardBox {
-    display: flex;
-    user-select: none;
-    padding: 16px;
-    margin-bottom: 8px;
-    width: 88%;
-    max-width: 100%;
-    border-radius: 5%;
-    background: white;
-}
+
