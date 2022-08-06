@@ -43,13 +43,10 @@ const updateIndex = (tasksList, id) => {
 const NewCard = (props) => {
   const { droppableId } = props
   const { tasks, setTasks } = useContext(KanbanContext);
-  console.log('new card component init');
   const [addCard, setAddCard] = useState(false)
   const [newTask, setNewTask] = useState("")
-  console.log('addCard is:', addCard);
 
   const handleSubmitNewCard = (event) => {
-    console.log('submitNewCard form init');
 
     event.preventDefault()
     const taskObject = {
