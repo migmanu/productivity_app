@@ -96,7 +96,6 @@ const NewCard = (props) => {
   const handleClick = (event) => {
     // function used solely to change the state of addCard and thus display or hide the NewCard text filed.
     event.preventDefault()
-    console.log('handleClick function init, addCard is: ', addCard);
     setAddCard(!addCard)
   }
 
@@ -111,7 +110,6 @@ const NewCard = (props) => {
   }
 
   if (addCard === true) {
-    console.log('newTask.length is: ', newTask.length, 'operand: ', Math.ceil(newTask.length / 33))
     return (
       <div className="newCardWrapper">
         <textarea type="textarea" rows={
