@@ -9,7 +9,7 @@ const getColumnStyle = isDraggingOver => ({
   background: isDraggingOver ? "lightblue" : "none",
   padding: 5,
   listStyle: 'none',
-  maxHeight: '95%',
+  maxHeight: '93%',
   overflowY: 'auto',
   overflowX: 'hidden'
 });
