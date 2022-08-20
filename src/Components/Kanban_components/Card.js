@@ -25,13 +25,13 @@ const Card = (props) => {
   let columnBorder = "5px solid black"
 
   if (column === 0) {
-    columnBorder = "5px solid pink"
-  }
-  if (column === 1) {
     columnBorder = "5px solid blue"
   }
-  if (column === 3) {
+  if (column === 1) {
     columnBorder = "5px solid green"
+  }
+  if (column === 2) {
+    columnBorder = "5px solid red"
   }
 
   return (
