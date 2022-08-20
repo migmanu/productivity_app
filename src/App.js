@@ -21,7 +21,7 @@ const App = () => {
     taskService
       .getAll()
       .then(response => {
-        console.log(response);
+        console.log(`response is ${JSON.stringify(response.data)}`)
         const toDo = response.data.filter(task => task.column === 0)
         toDo.sort((a, b) => a.position - b.position)
 
@@ -40,6 +40,7 @@ const App = () => {
       })
   }, [])
 
+  console.log(`app.js tasks set to: ${JSON.stringify(tasks)}`)
 
 
   return (
