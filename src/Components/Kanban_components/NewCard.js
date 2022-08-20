@@ -18,6 +18,7 @@ const getCardStyle = (height) => ({
 });
 
 const updateIndex = (tasksList, id) => {
+  console.log(`taskList to update is: ${JSON.stringify(tasksList)}`)
   let index = 1
 
   tasksList.forEach(task => {
@@ -34,9 +35,11 @@ const updateIndex = (tasksList, id) => {
         .then(
           console.log(`task ${newTask.content} updated with position ${newTask.position} `)
         )
+
       index += 1
     }
   })
+  console.log(`updates taskList: ${JSON.stringify(tasksList)}`)
 }
 
 
@@ -56,9 +59,6 @@ const NewCard = (props) => {
       position: 0
     }
 
-    const newTasksArray = tasks
-    console.log(`newTasksArray is ${newTasksArray}`)
-
     let newCardID
 
     taskService
@@ -67,30 +67,50 @@ const NewCard = (props) => {
         console.log('task saved to local server');
         setAddCard(false)
         newCardID = response.id
+        let tasksCopy = tasks;
+        tasksCopy[droppableId].unshift(taskObject)
+        console.log(`taskcopy: ${JSON.stringify(tasksCopy[droppableId])}`)
+
+        taskService
+          .getAll()
+          .then(response => {
+            console.log(`droppableId: ${droppableId}`)
+            let tasksFetched = response.data
+            console.log(`tasksFetched before filter: ${JSON.stringify(tasksFetched)}`)
+            tasksFetched.filter(task => task.column === droppableId);
+            tasksFetched.sort((a, b) => a.position - b.position)
+            console.log(`tasksFetched: ${JSON.stringify(tasksFetched)}`)
+            updateIndex(tasksFetched, newCardID)
+
+            taskService
+              .getAll()
+              .then(response => {
+                console.log(`newCard getAll init`)
+                let toDo = response.data.filter(task => task.column === 0)
+                toDo.sort((a, b) => a.position - b.position)
+
+
+                const doing = response.data.filter(task => task.column === 1)
+                doing.sort((a, b) => a.position - b.position)
+
+                const done = response.data.filter(task => task.column === 2)
+                done.sort((a, b) => a.position - b.position)
+                setTasks(
+                  [
+                    toDo,
+                    doing,
+                    done
+                  ]
+                )
+              }
+              )
+
+          })
+
+
+
       })
-    taskService
-      .getAll()
-      .then(response => {
-        console.log(`newCardID accesible in get: ${newCardID}`)
-        console.log(response);
-        let toDo = response.data.filter(task => task.column === 0)
-        updateIndex(toDo, newCardID)
 
-        toDo.sort((a, b) => a.position - b.position)
-
-        const doing = response.data.filter(task => task.column === 1)
-        doing.sort((a, b) => a.position - b.position)
-
-        const done = response.data.filter(task => task.column === 2)
-        done.sort((a, b) => a.position - b.position)
-        setTasks(
-          [
-            toDo,
-            doing,
-            done
-          ]
-        )
-      })
   }
 
   const handleClick = (event) => {
