@@ -10,7 +10,6 @@ const getCardStyle = (isDragging, draggableStyle, columnBorder) => ({
   margin: `0 0 ${grid}px 0`,
   borderLeft: columnBorder,
   borderRadius: 5,
-  maxWidth: 300,
 
   // change background colour if dragging
   background: isDragging ? "lightgray" : "white",
