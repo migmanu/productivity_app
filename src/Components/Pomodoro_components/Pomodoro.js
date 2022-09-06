@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import StartButton from './StartButton'
 import styles from './timer_styles.module.css'
 import Timer from './Timer'
+import restartIcon from '../../Icons/restart.svg'
 
 const Pomodoro = (props) => {
   const [minutes, setMinutes] = useState('25')
@@ -68,11 +69,11 @@ const Pomodoro = (props) => {
             setSeconds={setSeconds} isActive={isActive}
             setIsActive={setIsActive} counter={counter} setCounter={setCounter} />
         </div>
-        <div className={styles.buttons}>
+        <div className={styles.buttonsContainer}>
           <StartButton setIsActive={setIsActive} isActive={isActive} />
-          <button onClick={stopTimer} className={styles.reset}>Restart</button>
+          <input type="image" src={restartIcon} onClick={stopTimer} className={styles.reset}></input>
         </div>
-        <span className={styles.pomodoros}>Pomodoros {pomodoros}</span>
+        <span className={styles.pomodoros}># {pomodoros}</span>
       </div>
     </div>
   )
