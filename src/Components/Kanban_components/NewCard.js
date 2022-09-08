@@ -51,6 +51,12 @@ const NewCard = (props) => {
 
   const handleSubmitNewCard = (event) => {
 
+    if (newTask.length === 0) {
+      console.log("submitted new card with no content")
+      alert("No content submitted to new card")
+      return
+    }
+
     event.preventDefault()
     const taskObject = {
       content: newTask,
