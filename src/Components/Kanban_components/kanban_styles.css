@@ -32,6 +32,10 @@
     background: lightcoral;
 }
 
+.deleteCardButton {
+  height: 30px;
+}
+
 .addCardButton {
     background-color: black;
     width:40px;
