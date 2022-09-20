@@ -1,4 +1,5 @@
 import { Draggable } from 'react-beautiful-dnd';
+import './kanban_styles.css';
 
 const grid = 8;
 
@@ -21,6 +22,7 @@ const getCardStyle = (isDragging, draggableStyle, columnBorder) => ({
 const Card = (props) => {
   const { index, id, content, column } = props
 
+  //blue for To-Do, green for Doing and red for Done
   let columnBorder = "5px solid black"
 
   if (column === 0) {
@@ -33,6 +35,12 @@ const Card = (props) => {
     columnBorder = "5px solid red"
   }
 
+  const handleDeleteCard = cardToDeleteId => {
+    const cardToDelete = {
+      id: cardToDeleteId
+    }
+  }
+
   return (
     <Draggable key={id} draggableId={id} index={index}>
       {(provided, snapshot) => (
@@ -42,6 +50,7 @@ const Card = (props) => {
             provided.draggableProps.style,
             columnBorder
           )}>
+          <button className={"deleteCardButton"}></button>
           <p>
             {content}
           </p>
