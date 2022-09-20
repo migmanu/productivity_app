@@ -10,15 +10,21 @@ const create = newObject => {
   return request.then(response => response.data)
 }
 
-const update = (task) => {
+const update = task => {
   const request = axios.put(`${baseUrl}/${task.id}`, task)
   return request.then(response => response.data)
+}
+
+const deleteCard = cardToDelete => {
+  const request = axios.delete(baseUrl, cardToDelete);
+  return request.then(response => response.data);
 }
 
 const taskService = {
   getAll,
   create,
-  update
+  update,
+  deleteCard
 }
 
 
